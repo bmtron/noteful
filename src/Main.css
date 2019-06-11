@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+}
+
+.Note {
+    
+    margin-left: 10px;
+    margin-top: 10px;
+}

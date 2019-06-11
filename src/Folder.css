@@ -1,0 +1,11 @@
+.folder_main {
+    width: 250px;
+    border: 1px solid black;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+p {
+    text-align: center;
+}
