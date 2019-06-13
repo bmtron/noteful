@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
 export default class Notes extends Component {
+    
     render() {
         const id = this.props.id;
         return (

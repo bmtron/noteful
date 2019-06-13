@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 class NoteSidebar extends Component {
     render() {
         const id = this.props.note;
-        let note = this.props.info.notes.find(item => item.id === id);
+        let note = this.props.noteInfo.find(item => item.id === id);
 
-        let folder = this.props.info.folders.find(item => item.id === note.folderId);
+        let folder = this.props.info.find(item => item.id === note.folderId);
         
 
         return (

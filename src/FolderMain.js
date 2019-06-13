@@ -5,7 +5,7 @@ export default class FolderMain extends Component {
 
     render() {
         const id = this.props.folderId;
-        let note = this.props.info.notes.map((item, index) => {
+        let note = this.props.info.map((item, index) => {
             if (item.folderId === id) {
                 return item;
             }
