@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import NoteContext from './NoteContext';
 import Notes from './Notes';
 import './Main.css';
