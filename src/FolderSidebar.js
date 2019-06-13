@@ -11,7 +11,7 @@ export default class FolderSidebar extends Component {
         return (
             <div>
                 {test.folders.map((item, index) => {
-                    return <Folder name={item.name} key={index} id={item.id} setSelectedFolder={test.onSelectFolder}/>;
+                    return <Folder name={item.name} key={index} id={item.id} setSelectedFolder={test.setSelectFolder}/>;
                 })}
             </div>
         )

@@ -9,7 +9,7 @@ export default class MainSidebar extends Component {
         return (
             <section className="main_sidebar">
                 {test.folders.map((item, index) => {
-                    return <Folder name={item.name} key={index} id={item.id} setSelectedFolder={test.onSelectedFolder}/>;
+                    return <Folder name={item.name} key={index} id={item.id} setSelectedFolder={test.setSelectedFolder}/>;
                 })}
             </section>
         )
