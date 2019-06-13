@@ -23,8 +23,9 @@ class App extends Component {
   }
   setSelectedFolder = (id) => {
     this.setState({
-      selected: id
+      selectedFolder: id
     })
+    
   }
   setSelectedNote = (id) => {
     this.setState({
@@ -52,7 +53,7 @@ class App extends Component {
     })
   }
   
-  componentDidMount() {
+  componentWillMount() {
     fetch('http://localhost:9090/folders', {
       method: 'GET',
     })
@@ -84,19 +85,22 @@ class App extends Component {
     })
     .then(data => this.setState({
       notes: data,
-      selectedNote: data[0].id
+      selectedNote: data[2].id
     })).catch(error => {
       console.error(error)
     })
   }
   render() {
-   console.log(NoteContext); 
+   
    const contextValue = {
      folders: this.state.folders,
      notes: this.state.notes,
      selectedFolder: this.state.selectedFolder,
-     selectedNotes: this.state.selectedNotes
+     selectedNotes: this.state.selectedNote,
+     setSelectedNote: this.setSelectedNote,
+     setSelectFolder: this.setSelectedFolder
    }
+   console.log(contextValue);
     return (
 
         <div className="App">
@@ -108,14 +112,14 @@ class App extends Component {
           <main>
             <NoteContext.Provider value={contextValue}>
               <section className="sidebar">
-                <Route exact path='/' render={(props) => <MainSidebar info={this.state.folders} setSelectedFolder={this.setSelectedFolder}/>}/>
-                <Route path='/folder/:folderId' render={(props) => <FolderSidebar info={this.state.folders} setSelectedFolder={this.setSelectedFolder}/>}/>
-                <Route path='/notes/:notesId' render={(props) => <NotesSidebar info={this.state.folders} noteInfo={this.state.notes} note={this.state.selectedNote}/>}/>
+                <Route exact path='/' component={MainSidebar}/>
+                <Route path='/folder/:folderId' component={FolderSidebar}/>
+                <Route path='/notes/:notesId' component={NotesSidebar}/>
               </section>
               <section className="main">
-                <Route exact path='/' render={(routerProps) => <MainMain selectedNote={this.setSelectedNote} info={this.state.notes}/>}/>
-                <Route path='/folder/:folderId' render={(routerProps) => <FolderMain selectedNote={this.setSelectedNote} info={this.state.notes} folderId={this.state.selected}/>}/>
-                <Route path='/notes/:notesId' render={(routerProps) => <NotesMain info={this.state.notes} note={this.state.selectedNote}/>}/>
+                <Route exact path='/' component={MainMain}/>
+                <Route path='/folder/:folderId' component={FolderMain}/>
+                <Route path='/notes/:notesId' component={NotesMain}/>
               </section>
           </NoteContext.Provider>
           </main>

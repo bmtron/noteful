@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+
+import NoteContext from './NoteContext';
 
 class NoteSidebar extends Component {
+    static contextType = NoteContext;
     render() {
-        const id = this.props.note;
-        let note = this.props.noteInfo.find(item => item.id === id);
-
-        let folder = this.props.info.find(item => item.id === note.folderId);
-        
-
+        const test = this.context || {};
+        const id = test.selectedNotes;
+        const note = test.notes.find(item => item.id === id) || {};
+        const folder = test.folders.find(item => note.folderId === item.id) || {};
+        console.log(folder)
         return (
             <div className="folder_main">
                 <button onClick={() => this.props.history.goBack()}>Go Back</button>
@@ -17,4 +18,4 @@ class NoteSidebar extends Component {
         )
     }
 }
-export default withRouter(NoteSidebar);
+export default NoteSidebar;
