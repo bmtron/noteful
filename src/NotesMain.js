@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NoteContext from './NoteContext';
+import Notes from './Notes';
 
 export default class NotesMain extends Component {
     static contextType = NoteContext;
@@ -10,10 +11,7 @@ export default class NotesMain extends Component {
         
         return (
             <div>
-                <p>{note.name}</p>
-                <p>{note.content}</p>
-                <p>{note.modified}</p>
-                <p>{note.id}</p>
+                <Notes history={this.props.history} name={note.name} content={note.content} date={note.modified} folderId={note.folderId} id={note.id}/>
             </div>
         )
     }

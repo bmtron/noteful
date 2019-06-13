@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import NoteContext from './NoteContext';
 
 class NoteSidebar extends Component {

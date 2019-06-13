@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import NotesSidebar from './NoteSidebar';
 import FolderSidebar from './FolderSidebar';
 import FolderMain from './FolderMain';
-import dummyStore from './dummyStore';
 import MainSidebar from './MainSidebar';
 import MainMain from './MainMain';
 import NotesMain from './NotesMain';
@@ -32,27 +31,13 @@ class App extends Component {
       selectedNote: id
     })
   }
-  fetchFolders = () => {
+  deleteNote = (id) => {
+    const newNotes = this.state.notes.filter(note => note.id !== id);
 
-    fetch('https://localhost:9090/folders', {
-      method: 'GET',
-    })
-    .then(res => {
-      if (!res.ok) {
-        return res.json().then(error => {
-          throw error
-        })
-      }
-      return res.json()
-    })
-    .then(data => this.setState({
-      folders: data,
-      selectedFolder: data[0].id
-    })).catch(error => {
-      console.error(error)
+    this.setState({
+      notes: newNotes
     })
   }
-  
   componentWillMount() {
     fetch('http://localhost:9090/folders', {
       method: 'GET',
@@ -98,7 +83,8 @@ class App extends Component {
      selectedFolder: this.state.selectedFolder,
      selectedNotes: this.state.selectedNote,
      setSelectedNote: this.setSelectedNote,
-     setSelectFolder: this.setSelectedFolder
+     setSelectFolder: this.setSelectedFolder,
+     deleteNote: this.deleteNote
    }
    console.log(contextValue);
     return (

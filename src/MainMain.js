@@ -11,7 +11,7 @@ export default class Main extends Component {
         return (
             <div>
                {test.notes.map((item, index) => {
-                   return <Notes setSelectedNote={test.setSelectedNote} key={index} id={item.id} folderId={item.folderId} name={item.name} content={item.content} date={item.modified}/>;
+                   return <Notes history={this.props.history} setSelectedNote={test.setSelectedNote} key={index} id={item.id} folderId={item.folderId} name={item.name} content={item.content} date={item.modified}/>;
                })}
             </div>
         )

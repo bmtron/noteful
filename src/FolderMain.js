@@ -20,7 +20,7 @@ export default class FolderMain extends Component {
         return (
             <div>
                 {note.map((item, index) => {
-                    return <Notes key={index} setSelectedNote={test.setSelectedNote} id={item.id} folderId={item.folderId} name={item.name} content={item.content} date={item.modified}/>;
+                    return <Notes history={this.props.history} key={index} setSelectedNote={test.setSelectedNote} id={item.id} folderId={item.folderId} name={item.name} content={item.content} date={item.modified}/>;
                 })}
             </div>
         )
