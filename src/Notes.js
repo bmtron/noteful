@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NoteContext from './NoteContext';
+import PropTypes from 'prop-types';
 
 function deleteNote(noteId, cb) {
     fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -48,4 +49,13 @@ export default class Notes extends Component {
             </NoteContext.Consumer>
         )
     }
+}
+Notes.propTypes = {
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    folderId: PropTypes.number,
+    setSelectedNote: PropTypes.func.isRequired
+
 }

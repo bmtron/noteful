@@ -9,6 +9,9 @@ import MainMain from './MainMain';
 import NotesMain from './NotesMain';
 import './Main.css'
 import NoteContext from './NoteContext';
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
+import ErrorControl from './ErrorControl';
 
 class App extends Component {
   constructor(props) {
@@ -38,7 +41,7 @@ class App extends Component {
       notes: newNotes
     })
   }
-  componentWillMount() {
+  componentDidMount() {
     fetch('http://localhost:9090/folders', {
       method: 'GET',
     })
@@ -95,18 +98,35 @@ class App extends Component {
               <h1>Noteful</h1>
             </header>
           </Link>
+          <nav>
+              <Link to='/addFolder' style={{textDecoration: 'none'}}><button>Add Folder</button></Link>
+              <Link to='/addNote'><button>Add Note</button></Link>
+            
+          </nav>
           <main>
+            <ErrorControl>
+              <Route path='/addFolder' component={AddFolder}/>
+            </ErrorControl>
             <NoteContext.Provider value={contextValue}>
-              <section className="sidebar">
-                <Route exact path='/' component={MainSidebar}/>
-                <Route path='/folder/:folderId' component={FolderSidebar}/>
-                <Route path='/notes/:notesId' component={NotesSidebar}/>
-              </section>
-              <section className="main">
-                <Route exact path='/' component={MainMain}/>
-                <Route path='/folder/:folderId' component={FolderMain}/>
-                <Route path='/notes/:notesId' component={NotesMain}/>
-              </section>
+              <ErrorControl>
+                <Route path='/addNote' component={AddNote}/>
+              </ErrorControl>
+            </NoteContext.Provider>
+            <NoteContext.Provider value={contextValue}>
+              <ErrorControl>
+                <section className="sidebar">
+                  <Route exact path='/' component={MainSidebar}/>
+                  <Route path='/folder/:folderId' component={FolderSidebar}/>
+                  <Route path='/notes/:notesId' component={NotesSidebar}/>
+                </section>
+              </ErrorControl>
+              <ErrorControl>
+                <section className="main">
+                  <Route exact path='/' component={MainMain}/>
+                  <Route path='/folder/:folderId' component={FolderMain}/>
+                  <Route path='/notes/:notesId' component={NotesMain}/>
+                </section>
+              </ErrorControl>
           </NoteContext.Provider>
           </main>
         </div>
